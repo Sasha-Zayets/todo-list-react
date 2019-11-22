@@ -2,6 +2,7 @@
   "name": "my-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sasha-zayets.github.io/todo-list-react/",
   "dependencies": {
     "node-sass": "^4.13.0",
     "react": "^16.9.0",
@@ -9,6 +10,8 @@
     "react-scripts": "3.1.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -28,5 +31,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
