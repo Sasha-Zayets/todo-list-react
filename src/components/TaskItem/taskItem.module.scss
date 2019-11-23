@@ -1,4 +1,5 @@
 $task: '.taskItem';
+$edit: '.edit';
 
 #{$task} {
     padding: 20px 10px;
@@ -42,6 +43,16 @@ $task: '.taskItem';
         transition-duration: 0.5s;
     }
 
+    &__edit {
+        margin-right: 10px;
+        cursor: pointer;
+        color: #4cb54c;
+        transition-duration: 0.3s;
+        &:hover {
+            color: #057d05;
+        }
+    }
+
     &__delete {
         color: red;
         cursor: pointer;
@@ -50,4 +61,8 @@ $task: '.taskItem';
             color: #981111;
         }
     }
+}
+
+#{$edit} {
+    
 }

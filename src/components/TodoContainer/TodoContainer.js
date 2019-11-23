@@ -13,7 +13,13 @@ class TodoContainer extends React.Component {
 
         this.state = {
             nameTask: '',
-            tasks: []
+            tasks: [
+                {
+                    id: 0,
+                    name: 'valueField',
+                    done: false
+                }
+            ]
         }
     }
 
@@ -25,7 +31,7 @@ class TodoContainer extends React.Component {
             myTask.push({
                 id: myTask.length,
                 name: valueField,
-                done: true
+                done: false
             })
 
             this.setState({
@@ -81,11 +87,14 @@ class TodoContainer extends React.Component {
                         </div>
                     </div>
 
-                    <TaskList 
-                        listTask={this.state.tasks} 
-                        onDeleteElement={this.deleteElement}
-                        onDone={this.doneTask}    
-                    />
+                    {   (this.state.tasks.length === 0) 
+                        ? <span>No tasks, add them</span>
+                        : <TaskList 
+                            listTask={this.state.tasks} 
+                            onDeleteElement={this.deleteElement}
+                            onDone={this.doneTask}    
+                          />
+                    }
                 </div>
             </React.Fragment>
         )
