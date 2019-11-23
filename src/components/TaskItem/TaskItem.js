@@ -5,19 +5,58 @@ import TextField from '../TextField/TextField';
 export default class TaskItem extends React.Component {
     constructor (props) {
         super();
-
+        
         this.state = {
-            editFieldValue: ''
+            editFieldValue: '',
+            showTaskItem: true,
+            error: false
         }
     }
 
     editValue = (event) => {
         const value = event.target.value;
-        console.log(value)
+        
+        this.setState({
+            editFieldValue: value
+        });
+    }
+
+    fadeEditBlock = () => {
+        this.setState({
+            showTaskItem: true
+        });
+    }
+
+    confirmEditBlock = () => {
+        const newValue = this.state.editFieldValue;
+        const id = this.props.task.id;
+
+        if (newValue.length > 1) {
+            this.props.onEditElement(id, newValue);
+
+            this.setState({
+                showTaskItem: true
+            });
+        } else {
+            this.setState({
+                error: true
+            });
+
+            setTimeout(() => {
+                this.setState({
+                    error: false
+                });
+            }, 5000);
+        }
     }
 
     editItem = () => {
-        console.log('click')
+        const valueEdit = this.props.task.name;
+
+        this.setState({
+            editFieldValue: valueEdit,
+            showTaskItem: false
+        });
     }
 
     render () {
@@ -25,45 +64,55 @@ export default class TaskItem extends React.Component {
 
         return (
             <React.Fragment>
-                <div className={item.taskItem}>
-                    <div className={item.taskItem__checkbox}>
-                        <input 
-                            type="checkbox" 
-                            checked={this.props.task.done} 
-                            onChange={this.props.onDone.bind(this, this.props.task.id)}/>
+                {   this.state.showTaskItem
+                    ? <div className={item.taskItem}>
+                        <div className={item.taskItem__checkbox}>
+                            <input 
+                                type="checkbox" 
+                                checked={this.props.task.done} 
+                                onChange={this.props.onDone.bind(this, this.props.task.id)}/>
+                        </div>
+                        <div className={[item.taskItem__name, checkedClass].join(' ')}>
+                            { this.props.task.name }
+                        </div>
+                        <div className={item.taskItem__events}>
+                            <span
+                                className={item.taskItem__edit}
+                                onClick={this.editItem}>
+                                    <i className="fa fa-edit"></i>
+                                </span>
+                            <span 
+                                className={item.taskItem__delete}
+                                onClick={() => this.props.onDeleteElement(this.props.task.id)}
+                            ><i className="fa  fa-trash-o"></i></span>
+                        </div>
                     </div>
-                    <div className={[item.taskItem__name, checkedClass].join(' ')}>
-                        { this.props.task.name }
-                    </div>
-                    <div className={item.taskItem__events}>
-                        <span
-                            className={item.taskItem__edit}
-                            onClick={this.editItem}>
-                                <i className="fa fa-edit"></i>
-                            </span>
-                        <span 
-                            className={item.taskItem__delete}
-                            onClick={() => this.props.onDeleteElement(this.props.task.id)}
-                        ><i className="fa  fa-trash-o"></i></span>
-                    </div>
-                </div>
 
-                <div className={item.edit}>
-                    <div className={item.edit__field}>
-                        <TextField 
-                            onChangeField={this.editValue} 
-                            placeholder="New Task"
-                            value={this.state.editFieldValue}/>
-                    </div>
-                    <div className={item.edit__events}>
-                        <span className={item.edit__close}>
-                            <i className="fa fa-close" />
-                        </span>
-                        <span className={item.edit__confirm}>
-                            <i className="fa fa-check-circle" />
-                        </span>
-                    </div>
-                </div>
+                    :   <div className={item.edit}>
+                            <div className={item.edit__field}>
+                                <TextField 
+                                    onChangeField={this.editValue} 
+                                    placeholder="New Task"
+                                    value={this.state.editFieldValue}/>
+                                <span className={[item.edit__error, this.state.error ? item.edit__errorShow : ''].join(' ')}>Name must contain more than one character</span>
+                            </div>
+                            <div className={item.edit__events}>
+                                <span 
+                                    className={item.edit__close}
+                                    onClick={this.fadeEditBlock}
+                                >
+                                    <i className="fa fa-close" />
+                                </span>
+                                <span 
+                                    className={item.edit__confirm}
+
+                                    onClick={this.confirmEditBlock}
+                                >
+                                    <i className="fa fa-check-circle" />
+                                </span>
+                            </div>
+                        </div>
+                }
             </React.Fragment>
         )
     }

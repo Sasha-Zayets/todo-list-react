@@ -71,6 +71,18 @@ class TodoContainer extends React.Component {
         })
     }
 
+    editElement = (id, value) => {
+        const task = this.state.tasks;
+        const changeTask = task[id];
+
+        changeTask.name = value;
+        task[id] = changeTask;
+
+        this.setState({
+            tasks: task
+        })
+    }
+
     render () {
         return (
             <React.Fragment>
@@ -92,6 +104,7 @@ class TodoContainer extends React.Component {
                         : <TaskList 
                             listTask={this.state.tasks} 
                             onDeleteElement={this.deleteElement}
+                            onEditElement={this.editElement}
                             onDone={this.doneTask}    
                           />
                     }

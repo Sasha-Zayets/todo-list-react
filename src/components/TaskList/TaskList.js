@@ -16,7 +16,8 @@ export default class TaskList extends React.Component {
                         <TaskItem 
                             key={index} 
                             task={task} 
-                            onDeleteElement={this.props.onDeleteElement} 
+                            onDeleteElement={this.props.onDeleteElement}
+                            onEditElement={this.props.onEditElement}
                             onDone={this.props.onDone}/>
                     )
                 })}

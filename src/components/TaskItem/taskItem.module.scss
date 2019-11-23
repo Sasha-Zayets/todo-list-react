@@ -64,5 +64,43 @@ $edit: '.edit';
 }
 
 #{$edit} {
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     
+    &__field {
+        flex-grow: 2;
+        margin-right: 10px;
+        position: relative;
+    }
+
+    &__events {
+        font-size: 18px;
+    }
+
+    &__close {
+        color: red;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    &__confirm {
+        cursor: pointer;
+        color: green;
+    }
+
+    &__error {
+        width: 100%;
+        display: none;
+        color: red;
+        font-size: 12px;
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+    }
+
+    &__errorShow {
+        display: block;
+    }
 }
