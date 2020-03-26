@@ -1,22 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
+import propTypes from 'prop-types';
 import buttonClass from './Button.module.scss';
 
-export default class Button extends Component {
-    constructor (props) {
-        super();
+const Button = ({ marginLeft, onClick }) => {
+    const styles = {
+        marginLeft: marginLeft + 'px' || 0
     }
 
-    render () {
-        const styles = {
-            marginLeft: this.props.marginLeft + 'px'
-        }
-
-        return (
-            <button 
-                className={buttonClass.button} 
-                style={styles}
-                onClick={this.props.addEventClick}
-            >Add post</button>
-        )
-    }
+    return (
+        <button 
+            className={buttonClass.button} 
+            style={styles}
+            onClick={onClick}
+        >Add post</button>
+    )
 }
+
+Button.propTypes = {
+    marginLeft: propTypes.number,
+    onClick: propTypes.func,
+}
+
+export default Button;

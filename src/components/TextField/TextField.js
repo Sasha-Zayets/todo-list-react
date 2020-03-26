@@ -1,21 +1,26 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import textField from './TextField.module.scss';
 
-class TextField extends React.Component {
-    constructor (props) {
-        super();
-    }
+const TextField = ({ onChange, value, placeholder }) => (
+    <div className={textField.textField}>
+        <input 
+            onChange={onChange} 
+            placeholder={placeholder}
+            value={value}/>
+    </div>
+)
 
-    render () {
-        return (
-            <div className={textField.textField}>
-                <input 
-                    onChange={this.props.onChangeField} 
-                    placeholder={this.props.placeholder}
-                    value={this.props.value}/>
-            </div>
-        )
-    }
-} 
+TextField.propTypes = {
+    onChange: propTypes.func,
+    value: propTypes.oneOfType([
+        propTypes.number,
+        propTypes.string
+    ]),
+    placeholder: propTypes.oneOfType([
+        propTypes.number,
+        propTypes.string
+    ]),
+}
 
 export default TextField;

@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 import TodoContainer from './components/TodoContainer/TodoContainer';
 
 function App() {
   return (
-    <TodoContainer />
+    <BrowserRouter>
+      <TodoContainer />
+    </BrowserRouter>
   );
 }
 

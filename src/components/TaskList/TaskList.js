@@ -1,27 +1,39 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import list from './taskList.module.scss';
 
 import TaskItem from '../TaskItem/TaskItem';
 
-export default class TaskList extends React.Component {
+class TaskList extends React.Component {
     constructor (props) {
         super();
     }
 
     render () {
+        const { listTask, onDeleteElement, onEditElement, onDone } = this.props;
+
         return (
             <div className={list.taskList}>
-                { this.props.listTask.map((task, index) => {
+                { listTask.map((task, index) => {
                     return (
                         <TaskItem 
                             key={index} 
                             task={task} 
-                            onDeleteElement={this.props.onDeleteElement}
-                            onEditElement={this.props.onEditElement}
-                            onDone={this.props.onDone}/>
+                            onDeleteElement={onDeleteElement}
+                            onEditElement={onEditElement}
+                            onDone={onDone}/>
                     )
                 })}
             </div>
         )
     }
 }
+
+TaskList.propTypes = {
+    listTask: propTypes.array,
+    onDeleteElement: propTypes.func,
+    onEditElement: propTypes.func,
+    onDone: propTypes.func
+}
+
+export default TaskList;

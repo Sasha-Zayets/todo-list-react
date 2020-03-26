@@ -1,10 +1,8 @@
 import React from 'react';
-import todoContainer from './TodoContainer.module.scss';
+import './TodoContainer.scss';
 
 import Header from '../Header/Header';
-import Title from '../Title/Title';
-import TextField from '../TextField/TextField';
-import Button from '../Button/Button';
+import Router from '../../router';
 import TaskList from '../TaskList/TaskList';
 
 class TodoContainer extends React.Component {
@@ -87,19 +85,10 @@ class TodoContainer extends React.Component {
         return (
             <React.Fragment>
                 <Header />
-                <div className={todoContainer.wrapper}>
-                    <div className={todoContainer.TodoContainer}>
-                        <Title />
-                        <div className={todoContainer.flex}>
-                            <TextField 
-                                onChangeField={this.onChangeValue} 
-                                placeholder="New Task"
-                                value={this.state.nameTask}/>
-                            <Button marginLeft={10} addEventClick={this.addPost} />
-                        </div>
-                    </div>
+                <div className="wrapper">
+                    <Router />
 
-                    {   (this.state.tasks.length === 0) 
+                    {/* {   (this.state.tasks.length === 0) 
                         ? <span>No tasks, add them</span>
                         : <TaskList 
                             listTask={this.state.tasks} 
@@ -107,7 +96,7 @@ class TodoContainer extends React.Component {
                             onEditElement={this.editElement}
                             onDone={this.doneTask}    
                           />
-                    }
+                    } */}
                 </div>
             </React.Fragment>
         )
