@@ -2,12 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 import textField from './TextField.module.scss';
 
-const TextField = ({ onChange, value, placeholder }) => (
-    <div className={textField.textField}>
+const TextField = ({ onChange, value, placeholder, className, ...attr }) => (
+    <div className={`${textField.textField} ${className}`}>
         <input 
             onChange={onChange} 
             placeholder={placeholder}
-            value={value}/>
+            value={value}
+            {...attr} />
     </div>
 )
 
