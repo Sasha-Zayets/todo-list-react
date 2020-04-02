@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './registration.scss';
 import { connect } from 'react-redux';
 import { singUp } from '../../redux/actions/auth';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import AuthForm from '../../components/AuthForm/AuthForm';
 
 const Registration = ({ singUp }) => {
@@ -20,6 +20,8 @@ const Registration = ({ singUp }) => {
                 Registration
             </h2>
             <AuthForm sendForm={sendData}/>
+            <hr/>
+            <Link to="/login" className="registration__link">Login</Link>
         </div>
     )
 }

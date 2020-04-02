@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 const AuthForm = ({ sendForm, className, ...attr }) => {
     const [name, setName] = useState('');
     const [password, setPassword ] = useState('');
+    const [valid, setValid] = useState(true);
 
     const changeFieldName = ({ target }) => {
         setName(target.value);
@@ -16,7 +17,14 @@ const AuthForm = ({ sendForm, className, ...attr }) => {
     };
 
     const submitForm = () => {
-        sendForm({ name, password });
+        if(name.length < 3) {
+            setValid(false);
+        } else if(password.length < 4) {
+            setValid(false);
+        } else {
+            setValid(true);
+            sendForm({ name, password });
+        }
     }
 
     return (
@@ -34,6 +42,11 @@ const AuthForm = ({ sendForm, className, ...attr }) => {
                 onChange={changeFieldPassword}
                 className="auth-form__input"
                 placeholder="Enter your password" />
+            {   !valid &&
+                <span className="auth-form__error-message">
+                    Перевірте правильність вводу даних
+                </span>
+            }
             <Button type="button" onClick={submitForm} >Sing up</Button>
         </form>
     )

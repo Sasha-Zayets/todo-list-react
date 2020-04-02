@@ -25,7 +25,7 @@ class TaskForm extends React.PureComponent {
                     onChange={this.onChangeValue} 
                     placeholder="New Task"
                     value={this.state.nameTask}/>
-                <Button marginLeft={10} onClick={this.addTask} />
+                <Button marginLeft={10} onClick={this.addTask}>add task</Button>
             </div>
         )
     }

@@ -1,0 +1,12 @@
+.not-found {
+    &__title {
+        font-size: 32px;
+        color: red;
+    }
+    &__link {
+        font-size: 18px;
+        color: black;
+        text-decoration: none;
+        margin-right: 20px;
+    }
+}

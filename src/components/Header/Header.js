@@ -1,16 +1,11 @@
 import React from 'react';
 import classes from './header.module.scss';
+import { Link } from 'react-router-dom';
 
-export default class Header extends React.Component {
-    constructor (props) {
-        super();
-    }
+const Header = () => (
+    <header className={classes.header}>
+        <Link to="/" className={classes.header__title}>ToDo List</Link>
+    </header>
+);
 
-    render () {
-        return (
-            <header className={classes.header}>
-                <span className={classes.header__title}>ToDo List</span>
-            </header>
-        )
-    }
-}
+export default Header;
