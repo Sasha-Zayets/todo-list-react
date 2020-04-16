@@ -4,6 +4,10 @@ import TextField from '../TextField/TextField';
 import Button from '../Button/Button';
 
 class TaskForm extends React.PureComponent {
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         nameTask: ''
     }
@@ -15,7 +19,12 @@ class TaskForm extends React.PureComponent {
     }
 
     addTask = () => {
-        console.log('add post');
+        const { nameTask } = this.state;
+        const post = {
+            title: nameTask,
+            done: false
+        }
+        this.props.addTask(post);
     }
 
     render() {

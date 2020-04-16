@@ -19,14 +19,14 @@ export const singUp = (payload) => async (dispatch) => {
 
 export const signIn = (payload) => async (dispatch) => {
     try {
-        const data = await axios.post('http://localhost:3002/api/login', {
+        const result = await axios.post('http://localhost:3002/api/login', {
             ...payload
         });
-        
-        if(data.status === 200) {
-            dispatch(setAuth({ auth: true }));
+
+        if(result.status === 200) {
+            dispatch(setAuth({ auth: true, id: result.data._id }));
             localStorage.setItem('auth', true);
-            return data;
+            return result;
         } 
         throw Error;
     } catch(error) {

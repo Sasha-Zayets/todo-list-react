@@ -1,39 +1,39 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import list from './taskList.module.scss';
-
 import TaskItem from '../TaskItem/TaskItem';
+import { editTask } from '../../redux/actions/task';
 
-class TaskList extends React.Component {
-    constructor (props) {
-        super();
+const TaskList = ({listTask, updateTask}) => {
+    const update = (newTask) => {
+        const data = {
+            id: newTask._id,
+            task: newTask
+        }
+        updateTask(data);
     }
 
-    render () {
-        const { listTask, onDeleteElement, onEditElement, onDone } = this.props;
-
-        return (
-            <div className={list.taskList}>
-                { listTask.map((task, index) => {
-                    return (
-                        <TaskItem 
-                            key={index} 
-                            task={task} 
-                            onDeleteElement={onDeleteElement}
-                            onEditElement={onEditElement}
-                            onDone={onDone}/>
-                    )
-                })}
-            </div>
-        )
+    const deleteTask = (task) => {
+        console.log(task);
     }
+
+    return (
+        <div className={list.taskList}>
+            { listTask.map((task, index) => {
+                return (
+                    <TaskItem 
+                        key={index} 
+                        task={task}
+                        onUpdate={update}
+                        onDelete={deleteTask} />
+                )
+            })}
+        </div>
+    )
 }
 
-TaskList.propTypes = {
-    listTask: propTypes.array,
-    onDeleteElement: propTypes.func,
-    onEditElement: propTypes.func,
-    onDone: propTypes.func
-}
+const mapDispathToProps = dispatch => ({
+    updateTask: data => dispatch(editTask(data)),
+});
 
-export default TaskList;
+export default connect(null, mapDispathToProps)(TaskList);

@@ -9,8 +9,16 @@ export default class TaskItem extends React.Component {
         this.state = {
             editFieldValue: '',
             showTaskItem: true,
-            error: false
+            error: false,
+            task: {}
         }
+    }
+
+    componentDidMount() {
+        const task = this.props.task;
+        this.setState({
+            task
+        });
     }
 
     editValue = (event) => {
@@ -59,9 +67,21 @@ export default class TaskItem extends React.Component {
         });
     }
 
-    render () {
-        const checkedClass = this.props.task.done ? item.taskItem__done : '';
+    updateDone = () => {
+        const task = this.state.task;
+        task.done = !task.done;
 
+        this.setState({
+            task
+        }, () => {
+            this.props.onUpdate(this.state.task);
+        });
+    }
+
+    render () {
+        const { task } = this.props;
+        const checkedClass = task.done ? item.taskItem__done : '';
+        const { onDelete } = this.props;
         return (
             <React.Fragment>
                 {   this.state.showTaskItem
@@ -69,27 +89,26 @@ export default class TaskItem extends React.Component {
                         <div className={item.taskItem__checkbox}>
                             <input 
                                 type="checkbox" 
-                                checked={this.props.task.done} 
-                                onChange={this.props.onDone.bind(this, this.props.task.id)}/>
+                                checked={this.props.task.done}
+                                onChange={this.updateDone}/>
                         </div>
                         <div className={[item.taskItem__name, checkedClass].join(' ')}>
-                            { this.props.task.name }
+                            { this.props.task.title }
                         </div>
                         <div className={item.taskItem__events}>
                             <span
-                                className={item.taskItem__edit}
-                                onClick={this.editItem}>
+                                className={item.taskItem__edit}>
                                     <i className="fa fa-edit"></i>
                                 </span>
                             <span 
                                 className={item.taskItem__delete}
-                                onClick={() => this.props.onDeleteElement(this.props.task.id)}
+                                onClick={() => onDelete(task)}
                             ><i className="fa  fa-trash-o"></i></span>
                         </div>
                     </div>
 
                     :   <div className={item.edit}>
-                            <div className={item.edit__field}>
+                            {/* <div className={item.edit__field}>
                                 <TextField 
                                     onChangeField={this.editValue} 
                                     placeholder="New Task"
@@ -110,7 +129,7 @@ export default class TaskItem extends React.Component {
                                 >
                                     <i className="fa fa-check-circle" />
                                 </span>
-                            </div>
+                            </div> */}
                         </div>
                 }
             </React.Fragment>

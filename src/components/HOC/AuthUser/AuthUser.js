@@ -9,7 +9,7 @@ const authUser = (Component) => {
     }
 
     const mapStateToProps = (state) => ({
-        auth: state.auth.authUser
+        auth: state.auth.auth
     });
     return connect(mapStateToProps)(AuthUser);
 }
