@@ -23,7 +23,7 @@ export const deleteTask = payload => ({
 
 export const getTask = (id) => async (dispatch) => {
     try {
-        const result = await axios.post('http://localhost:3002/api/task', { id });
+        const result = await axios.post('https://node-api-todo-list.herokuapp.com/api/task', { id });
         
         if(result.status === 200) {
             console.log(result);
@@ -36,7 +36,7 @@ export const getTask = (id) => async (dispatch) => {
 
 export const addTask = (payload) => async (dispatch) => {
     try {
-        const result = await axios.post('http://localhost:3002/api/add-task', {
+        const result = await axios.post('https://node-api-todo-list.herokuapp.com/api/add-task', {
             ...payload
         });
 
@@ -52,7 +52,7 @@ export const addTask = (payload) => async (dispatch) => {
 
 export const removeTask = (id) => async (dispatch) => {
     try {
-        const result = await axios.delete(`http://localhost:3002/api/delete-task/${id}`);
+        const result = await axios.delete(`https://node-api-todo-list.herokuapp.com/api/delete-task/${id}`);
 
         if(result.status === 200) {
             dispatch(deleteTask(id));
@@ -65,7 +65,7 @@ export const removeTask = (id) => async (dispatch) => {
 
 export const editTask = ({id, task}) => async (dispatch) => {
     try {
-        const result = await axios.put('http://localhost:3002/api/edit-task', {
+        const result = await axios.put('https://node-api-todo-list.herokuapp.com/api/edit-task', {
             id, 
             task
         });

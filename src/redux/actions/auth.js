@@ -8,7 +8,7 @@ export const setAuth = (payload) => ({
 
 export const singUp = (payload) => async (dispatch) => {
     try {
-        const data = await axios.post('http://localhost:3002/api/registration', {
+        const data = await axios.post('https://node-api-todo-list.herokuapp.com/api/registration', {
             ...payload
         });
         return data;
@@ -19,7 +19,7 @@ export const singUp = (payload) => async (dispatch) => {
 
 export const signIn = (payload) => async (dispatch) => {
     try {
-        const result = await axios.post('http://localhost:3002/api/login', {
+        const result = await axios.post('https://node-api-todo-list.herokuapp.com/api/login', {
             ...payload
         });
 
