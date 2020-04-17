@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_TASK, ADD_TASK } from '../types/task';
+import { GET_TASK, ADD_TASK, UPDATE_TASK, DELETE_TASK } from '../types/task';
 
 export const setTask = payload => ({
     type: GET_TASK,
@@ -8,6 +8,16 @@ export const setTask = payload => ({
 
 export const addNewTask = payload => ({
     type: ADD_TASK,
+    payload
+});
+
+export const setEditTask = payload => ({
+    type: UPDATE_TASK,
+    payload
+});
+
+export const deleteTask = payload => ({
+    type: DELETE_TASK,
     payload
 });
 
@@ -40,10 +50,14 @@ export const addTask = (payload) => async (dispatch) => {
     }
 }
 
-export const removeTask = () => async (dispatch) => {
+export const removeTask = (id) => async (dispatch) => {
     try {
-        const data = await axios.delete('http://localhost:3002/api/remove-post');
-        console.log(data);
+        const result = await axios.delete(`http://localhost:3002/api/delete-task/${id}`);
+
+        if(result.status === 200) {
+            dispatch(deleteTask(id));
+            return result;
+        }
     } catch(error) {
         console.log(error);
     }
@@ -51,11 +65,15 @@ export const removeTask = () => async (dispatch) => {
 
 export const editTask = ({id, task}) => async (dispatch) => {
     try {
-        const data = await axios.put('http://localhost:3002/api/edit-task', {
+        const result = await axios.put('http://localhost:3002/api/edit-task', {
             id, 
             task
         });
-        return data;
+        if(result.status === 200) {
+            dispatch(setEditTask({id, task}));
+            return result;
+        }
+        throw Error;
     } catch(error) {
         console.log(error);
     }

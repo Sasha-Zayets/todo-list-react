@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import list from './taskList.module.scss';
 import TaskItem from '../TaskItem/TaskItem';
-import { editTask } from '../../redux/actions/task';
+import { editTask, removeTask } from '../../redux/actions/task';
 
-const TaskList = ({listTask, updateTask}) => {
+const TaskList = ({listTask, updateTask, deleteTask}) => {
     const update = (newTask) => {
         const data = {
             id: newTask._id,
@@ -13,8 +13,8 @@ const TaskList = ({listTask, updateTask}) => {
         updateTask(data);
     }
 
-    const deleteTask = (task) => {
-        console.log(task);
+    const onDeleteTask = ({_id}) => {
+        deleteTask(_id);
     }
 
     return (
@@ -25,7 +25,7 @@ const TaskList = ({listTask, updateTask}) => {
                         key={index} 
                         task={task}
                         onUpdate={update}
-                        onDelete={deleteTask} />
+                        onDelete={onDeleteTask} />
                 )
             })}
         </div>
@@ -34,6 +34,7 @@ const TaskList = ({listTask, updateTask}) => {
 
 const mapDispathToProps = dispatch => ({
     updateTask: data => dispatch(editTask(data)),
+    deleteTask: id => dispatch(removeTask(id)),
 });
 
 export default connect(null, mapDispathToProps)(TaskList);

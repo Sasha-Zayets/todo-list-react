@@ -28,7 +28,10 @@ const Todo = ({ auth, id, getTask, addTask, taskList }) => {
                         <>
                             <Title />
                             <TaskForm addTask={add}/>
-                            <TaskList listTask={taskList}/>
+                            {   taskList.length > 0 ?
+                                    <TaskList listTask={taskList}/>
+                                : <strong>you have no tasks</strong>
+                            }
                         </>
                     )
                 : <Redirect to="/login" /> 

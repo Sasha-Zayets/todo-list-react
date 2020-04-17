@@ -1,8 +1,8 @@
 import { SET_AUTH } from '../types/auth';
 
 const initialState = {
-    auth: true,
-    id: '5e7e6b76e2eafa3927e41aa2'
+    auth: false,
+    id: ''
 }
 
 const authReducer = (state = initialState, action) => {

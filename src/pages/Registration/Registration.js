@@ -8,6 +8,7 @@ import AuthForm from '../../components/AuthForm/AuthForm';
 const Registration = ({ singUp }) => {
     const history = useHistory();
     const sendData = ({name, password}) => {
+        console.log('asdas')
         singUp({name, password})
             .then(() => {
                 history.push('/login');
