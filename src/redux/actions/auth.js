@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REGISTRATION, SET_AUTH } from '../types/auth';
+import { SET_AUTH } from '../types/auth';
 
 export const setAuth = (payload) => ({
     type: SET_AUTH,
