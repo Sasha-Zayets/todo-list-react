@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://sasha-zayets.github.io/todo-list-react/",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
